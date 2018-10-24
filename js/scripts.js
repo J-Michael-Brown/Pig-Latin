@@ -1,7 +1,7 @@
 
 // converts word string to array and returns the index of the first vowel
 function findIndexFirstVowel(inputUserWordArray){
-  var vowels = ["a", "e", "i", "o","u"];
+  var vowels = ["a", "e", "i", "o","u", "A", "E", "I", "O","U"];
   for (var i = 0; i < inputUserWordArray.length; i++ ){
     for(var j = 0; j < vowels.length; j++){
       if (inputUserWordArray[i].indexOf(vowels[j]) !== -1){
