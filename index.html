@@ -9,25 +9,27 @@
   <title>Pig Latin</title>
 </head>
 <body>
-  <div id="container">
+  <div class="container">
+    <div class="jumbotron">
       <h1>Pig Latin</h1>
-      <form id="form1">
-        <div class="form-row">
-          <div class="form-group col-md-12">
-            <label for="inputStr">Input String:</label>
-            <input type="text" class="form-control" id="inputStr" placeholder="Enter a string">
-          </div>
+    </div>
+    <form id="form1">
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="inputStr">Input String:</label>
+          <input type="text" class="form-control" id="inputStr" placeholder="Enter a string">
         </div>
-        <button type="submit" class="btn btn-primary" id = "alignButton">submit</button>
-      </form>
+      </div>
+      <button type="submit" class="btn btn-primary" id = "alignButton">submit</button>
+    </form>
+    <div class="panel panel-success" id="result">
+      <div class="panel-heading">
+        <h3 class="panel-title">Translation</h3>
+      </div>
+      <div class="panel-body">
+        <p><span id="outputOriginalStrings"></span> <br> <span id="outputPigLatinStrings"></span></p>
+      </div>
     </div>
-    <div id="outputStrings">
-      <ul id="position">
-        <span></span>
-
-      </ul>
-
-    </div>
-
+  </div>
 </body>
 </html>

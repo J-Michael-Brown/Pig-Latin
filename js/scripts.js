@@ -45,12 +45,11 @@ function sentenceToPigLatin(sentence) {
     var wordIndex = findIndexFirstVowel(letterArray);
     var pigLatinWord = wordToPigLatin(letterArray, wordIndex);
     word = pigLatinWord.join("");
-    console.log(word);
     sentenceArrayOutput.push(word);
   })
 
   sentence = sentenceArrayOutput.join(" ");
-  console.log(sentence);
+  return sentence;
 }
 
 
@@ -61,13 +60,13 @@ $(document).ready(function(){
     var inputStringEnglish = $("#inputStr").val();
 
 
-    if(!parseInt(inputStringEnglish)) {
-      sentenceToPigLatin(inputStringEnglish);
-      //$("#position").append("<li>" + number + "</li>");
-
-
+    if(parseInt(inputStringEnglish) || !inputStringEnglish) {
+      alert("That is not a valid input! (But Number Pig Latin coming soon!! :D)");
     } else {
-      alert("That is a number! Number Pig Latin coming soon!! :D");
+      var outputPigLatin = sentenceToPigLatin(inputStringEnglish);
+      $("#outputOriginalStrings").text(inputStringEnglish);
+      $("#outputPigLatinStrings").text(outputPigLatin);
+      $("#result").show();
     }
 
 
