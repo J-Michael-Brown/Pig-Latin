@@ -1,6 +1,6 @@
 
 // converts word string to array and returns the index of the first vowel
-function addAy(inputUserWordArray){
+function findIndexFirstVowel(inputUserWordArray){
   var vowels = ["a", "e", "i", "o","u"];
   for (var i = 0; i < inputUserWordArray.length; i++ ){
     for(var j = 0; j < vowels.length; j++){
@@ -11,8 +11,7 @@ function addAy(inputUserWordArray){
   }
 }
 
-// returns an array of letters that make up a word translated from plain English into Pig Latin
-// function sliceWord(splitWord, splitWordIndex) {
+// function wordToPigLatin(splitWord, splitWordIndex) {
 //   var splitWordBegin = splitWord.slice(0, splitWordIndex);
 //   var splitWordEnd = [];
 //   splitWordEnd = splitWord.slice(splitWordIndex);
@@ -21,7 +20,9 @@ function addAy(inputUserWordArray){
 //   return pigLatinArray;
 // }
 
-function sliceWord(splitWord, splitWordIndex) {
+
+// returns an array of letters that make up a word translated from plain English into Pig Latin with start letters: "qu", "y", and vowels
+function wordToPigLatin(splitWord, splitWordIndex) {
   var pigLatinArray = [];
   if (splitWord[0] === "q" && splitWord[1] === "u") {
     splitWordIndex = 2;
@@ -35,18 +36,33 @@ function sliceWord(splitWord, splitWordIndex) {
 }
 
 
+function sentenceToPigLatin(sentence) {
+  var wordArray = sentence.split(" ");
+  var sentenceArrayOutput = [];
+
+  wordArray.forEach(function(word){
+    var letterArray = word.split("")
+    var wordIndex = findIndexFirstVowel(letterArray);
+    var pigLatinWord = wordToPigLatin(letterArray, wordIndex);
+    word = pigLatinWord.join("");
+    console.log(word);
+    sentenceArrayOutput.push(word);
+  })
+
+  sentence = sentenceArrayOutput.join(" ");
+  console.log(sentence);
+}
+
+
 $(document).ready(function(){
   $("form#form1").submit(function(event){
     event.preventDefault();
     //user-input
     var inputStringEnglish = $("#inputStr").val();
-    var inputArrayEnglish = inputStringEnglish.split("");
+
 
     if(!parseInt(inputStringEnglish)) {
-      var number = addAy(inputArrayEnglish);
-      alert(number);
-      var pigLatin = sliceWord(inputArrayEnglish, number);
-      alert(pigLatin.join(""));
+      sentenceToPigLatin(inputStringEnglish);
       //$("#position").append("<li>" + number + "</li>");
 
 
