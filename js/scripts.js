@@ -1,58 +1,37 @@
-// var newstr = userInput.replace(/^./, capitalFirst);
-// var finalOutPut = newstr.replace(/.$/, capitalLast);
-// alert(finalOutPut);
-// var capitalFirstLast;
-// var capitalFirst;
-// var capitalLast;
-// var capitalLastFirst;
-// var concatWithInput;
-// var  userInput = prompt("Enter Sentence:");
-// //function to pick first and last letter of string, capitalise and concat them
-// function concatFirstLast(capitalFirst, capitalLast){
-//   capitalFirst = userInput.charAt(0).toUpperCase();
-//   capitalLast = userInput.charAt(userInput.length-1).toUpperCase();
-//   capitalFirstLast = capitalFirst + capitalLast;
-//   alert(capitalFirstLast);
-// };
-// //function to reverse output of function concatFirstLast
-// function concatLastFirst(capitalFirstLast){
-//   capitalLastFirst = capitalFirstLast.charAt(1) + capitalFirstLast.charAt(0);
-//   alert(capitalLastFirst);
-// };
-// //function calls above functions and concats orignal string with the concatLastFirst output
-// function alertLetters(){
-//   concatFirstLast(capitalFirst, capitalLast);
-//   concatLastFirst(capitalFirstLast);
-//   concatWithInput = userInput + capitalLastFirst;
-//   alert(concatWithInput);
-// };
-// //function to concat middle character to the beginning of last output string
-//  function concatFront(){
-//    var half = userInput.length / 2;
-//    halfPosition = parseFloat(half.toFixed());
-//    var firstLetter = userInput.charAt(halfPosition);
-//    var finalOutPut = firstLetter + concatWithInput;
-//    alert(finalOutPut);
-//  };
-// alertLetters();
-// concatFront();
 
-
-check for vowels in array and replace with dashes
-function addAy(inputArrayVowels){
+// converts word string to array and returns the index of the first vowel
+function addAy(inputUserWordArray){
   var vowels = ["a", "e", "i", "o","u"];
-  var outputArrayDashes = [];
-  for(var i = 0; i <= vowels.length-1; i++){
-    for(var j = 0; j <= inputArrayVowels.length-1; j++){
-      if (inputArrayVowels[j] === vowels[i] || outputArrayDashes[j] === "-"){
-        outputArrayDashes[j] = "-"
-      }
-      else{
-        outputArrayDashes[j] = inputArrayVowels[j];
+  for (var i = 0; i < inputUserWordArray.length; i++ ){
+    for(var j = 0; j < vowels.length; j++){
+      if (inputUserWordArray[i].indexOf(vowels[j]) !== -1){
+        return i;
       }
     }
   }
-  $("#ouputStrings").text(outputArrayDashes.join(""));
+}
+
+// returns an array of letters that make up a word translated from plain English into Pig Latin
+// function sliceWord(splitWord, splitWordIndex) {
+//   var splitWordBegin = splitWord.slice(0, splitWordIndex);
+//   var splitWordEnd = [];
+//   splitWordEnd = splitWord.slice(splitWordIndex);
+//   var reverseWordArray = splitWordEnd.concat(splitWordBegin);
+//   var pigLatinArray = reverseWordArray.concat("ay");
+//   return pigLatinArray;
+// }
+
+function sliceWord(splitWord, splitWordIndex) {
+  var pigLatinArray = [];
+  if (splitWord[0] === "q" && splitWord[1] === "u") {
+    splitWordIndex = 2;
+  }
+  if (splitWordIndex === 0) {
+    pigLatinArray = splitWord.concat("way");
+  } else {
+    pigLatinArray = (splitWord.slice(splitWordIndex)).concat((splitWord.slice(0, splitWordIndex))).concat("ay");
+  }
+  return pigLatinArray;
 }
 
 
@@ -64,7 +43,12 @@ $(document).ready(function(){
     var inputArrayEnglish = inputStringEnglish.split("");
 
     if(!parseInt(inputStringEnglish)) {
-      addAy(inputArrayEnglish);
+      var number = addAy(inputArrayEnglish);
+      alert(number);
+      var pigLatin = sliceWord(inputArrayEnglish, number);
+      alert(pigLatin.join(""));
+      //$("#position").append("<li>" + number + "</li>");
+
 
     } else {
       alert("That is a number! Number Pig Latin coming soon!! :D");
